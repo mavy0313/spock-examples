@@ -1,3 +1,5 @@
+import com.mavy0313.spock.spockexamples.Notifier
+import com.mavy0313.spock.spockexamples.PaymentGateway
 import spock.lang.Specification
 
 class FirstSpecification extends Specification {
@@ -40,5 +42,46 @@ class FirstSpecification extends Specification {
         then:
         thrown(IndexOutOfBoundsException)
         list.size() == 4
+    }
+
+    def "numbers to the power of two"(int a, int b, int c) {
+        expect:
+        Math.pow(a, b) == c
+
+        where:
+        a | b | c
+        1 | 2 | 1
+        2 | 2 | 4
+        3 | 2 | 9
+    }
+
+    def "Mocking"() {
+        given:
+        def paymentGateway = Mock(PaymentGateway)
+//        paymentGateway.makePayment(_) >> true
+        paymentGateway.makePayment(_) >>> [true, true, false, true]
+
+        when:
+        def result1 = paymentGateway.makePayment(20)
+        def result2 = paymentGateway.makePayment(20)
+        def result3 = paymentGateway.makePayment(20)
+        def result4 = paymentGateway.makePayment(20)
+
+        then:
+        result1 == true
+        result2
+        !result3
+        result4
+    }
+
+    def "Should verify notify was called"() {
+        given:
+        def notifier = Mock(Notifier)
+
+        when:
+        notifier.notify('foo')
+
+        then:
+        1 * notifier.notify('foo')
     }
 }
