@@ -1,5 +1,6 @@
 import com.mavy0313.spock.spockexamples.Notifier
 import com.mavy0313.spock.spockexamples.PaymentGateway
+import com.mavy0313.spock.spockexamples.User
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -158,5 +159,36 @@ class FirstSpecification extends Specification {
     1 | 3 || 3
     7 | 4 || 4
     0 | 0 || 0
+  }
+
+  def "Power assertions"() {
+    expect:
+    (4 * 15) - (24 / 3) == (20 * 3) - 9
+  }
+
+  def "Power assertions with string"() {
+    expect:
+    def str = "String"
+    !str.isEmpty() && (str.startsWith("A") || str.contains("a"))
+  }
+
+  def "Power assert with objects1"() {
+    expect:
+    def user1 = new User("Spock")
+    def user2 = new User("Junit")
+    user1.name == user2.name
+  }
+
+  def "Power assert with objects"() {
+    expect:
+    def user = new User("Spock")
+    user.name == "SUnit"
+  }
+
+  def "Power assert with lists"() {
+    expect:
+    def list = ["Spock", "Junit"]
+    def list2 = ["Spock", "Junit", "TestNG"]
+    list == list2
   }
 }
