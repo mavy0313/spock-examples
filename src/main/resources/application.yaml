@@ -1,1 +1,17 @@
+# Let Spring autodetect the different SQL Dialects of each datasource
+spring:
+  jpa.database: default
+  # Generate the DB schema in the In-Memory H2 databases based on the JPA Entities
+  jpa.generate-ddl: true
 
+  # H2 In-Memory Database "foo" (used in tests instead of a real PostgreSQL DB)
+  datasource.url: jdbc:h2:mem:foo;DB_CLOSE_ON_EXIT=FALSE
+  datasource.username: sa
+  datasource.password:
+  datasource.driver-class-name: org.h2.Driver
+
+  # H2 In-Memory Database "bar" (used in tests instead of a real PostgreSQL DB)
+#bar.datasource.url=jdbc:h2:mem:bar;DB_CLOSE_ON_EXIT=FALSE
+#bar.datasource.username=sa
+#bar.datasource.password=
+#bar.datasource.driver-class-name=org.h2.Driver

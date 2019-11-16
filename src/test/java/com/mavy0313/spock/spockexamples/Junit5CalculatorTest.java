@@ -15,7 +15,9 @@ public class Junit5CalculatorTest {
       "0, 0, 0",
       "1, 1, 2"
   })
-  @DisplayName("Should return correct sum")
+  @DisplayName("Should return correct sum " +
+               "very very long multiline test name " +
+               "and one more line")
   public void shouldReturnCorrectSum(
       int first, int second, int expectedSum) {
     // given
